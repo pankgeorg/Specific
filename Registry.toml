@@ -1,6 +1,6 @@
-name = "General"
-uuid = "23338594-aafe-5451-b93e-139f81909106"
-repo = "https://github.com/JuliaRegistries/General.git"
+name = "Specific"
+uuid = "12345678-aafe-5451-b93e-139f81909106"
+repo = "https://github.com/pankgeorg/Specific.git"
 
 description = """
 Official general Julia package registry where people can
@@ -4323,6 +4323,7 @@ some amount of consideration when choosing package names.
 9b8beb19-0777-58c6-920b-28f749fee4d3 = { name = "JSONWebTokens", path = "J/JSONWebTokens" }
 9ba017d1-7760-46cd-84a3-1e79e9ae9ddc = { name = "PSFModels", path = "P/PSFModels" }
 9ba2d756-9ce3-11e9-1a71-0ffcb019784d = { name = "FameSVD", path = "F/FameSVD" }
+9ba89e20-285c-5b6f-9357-94700520ee1b = { name = "Distributed2", path = "D/Distributed2" }
 9baa0d68-9979-11e9-30aa-bfec78b4c1ae = { name = "FeedbackNets", path = "F/FeedbackNets" }
 9bb1a3dc-0d1c-467e-84f5-0c4ef701360a = { name = "GaussianBasis", path = "G/GaussianBasis" }
 9bb6cfbd-7763-5393-b1b5-1c8e09872146 = { name = "NRRD", path = "N/NRRD" }
