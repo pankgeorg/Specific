@@ -1,5 +1,4 @@
 [0]
-DocStringExtensions = "0.8"
 ElasticArrays = "1.2.0-1"
 
 ["0-0.1.0"]
@@ -10,6 +9,9 @@ Triangulate = "0.5"
 
 ["0-0.4"]
 julia = "1.3.0-1"
+
+["0-0.5.15"]
+DocStringExtensions = "0.8"
 
 ["0.1.1-0.2.0"]
 ExtendableGrids = "0.4"
@@ -41,14 +43,37 @@ GridVisualize = "0.1"
 ["0.5.0"]
 julia = "1.5.0-1"
 
-["0.5.1-0"]
+["0.5.1-0.5.13"]
 julia = "1.3.0-1"
 
 ["0.5.10-0.5.11"]
 GridVisualize = "0.2-0.4"
 
-["0.5.12-0"]
+["0.5.12-0.5.17"]
 GridVisualize = "0.2-0.5"
+
+["0.5.13"]
+ExtendableGrids = "0.7.2-0.9"
+
+["0.5.15-0"]
+julia = "1.6.0-1"
+
+["0.5.15-0.5.19"]
+ExtendableGrids = "0.9.5-0.9"
+
+["0.5.16-0"]
+DocStringExtensions = "0.8-0.9"
+FileIO = "1"
+MeshIO = "0.4"
+
+["0.5.18"]
+GridVisualize = "0.2-0.6"
+
+["0.5.19-0"]
+GridVisualize = ["0.2-0.6", "1"]
+
+["0.5.20-0"]
+ExtendableGrids = ["0.9.5-0.9", "1"]
 
 ["0.5.4-0.5.6"]
 GridVisualize = "0.2"
@@ -56,5 +81,5 @@ GridVisualize = "0.2"
 ["0.5.7-0.5.9"]
 GridVisualize = "0.2-0.3"
 
-["0.5.8-0"]
+["0.5.8-0.5.12"]
 ExtendableGrids = "0.7.2-0.8"

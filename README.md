@@ -46,10 +46,18 @@ requests need to be manually reviewed and merged by a human.
 It is ***highly recommended*** to also use [TagBot][tagbot], which automatically tags a release in your
 repository after the new release of your package is merged into the registry.
 
-Registered packages must have an [Open Source Initiative approved license](https://opensource.org/licenses),
-clearly marked via a `LICENSE.md`, `LICENSE`, `COPYING` or similarly named file in the package repository.
-Packages that wrap proprietary libraries are acceptable if the licenses of those libraries permit open
-source distribution of the Julia wrapper code.
+Registered packages MUST have an [Open Source Initiative approved license](https://opensource.org/licenses),
+clearly marked via the license file (see below for definition) in the package repository.
+Packages that wrap proprietary libraries (or otherwise restrictive libraries) are
+acceptable if the licenses of those libraries permit open source distribution of the Julia wrapper code.
+The more restrictive license of the wrapped code:
+1. MUST be mentioned in either the third party notice file or the license file (preferably the third party notice file).
+2. SHOULD be mentioned in the README file.
+
+Please note that:
+- "README file" refers to the plain text file named `README.md`, `README`, or something similar.
+- "License file" refers to the plain text file named `LICENSE.md`, `LICENSE`, `COPYING`, or something similar.
+- "Third party notice file" refers to the plain text file named `THIRD_PARTY_NOTICE.md`, `THIRD_PARTY_NOTICE`, or something similar.
 
 ### Automatic merging of pull requests
 
@@ -82,11 +90,12 @@ Registering allows the package to be added by `Pkg.add("Example")` or `] add Exa
 in the Pkg REPL mode. This is true if the package is installed in any registry
 you have installed, not just General; you can even create your own registry!
 
-#### Should I register my package?
+#### Should I register my package now?
 
-If your package might be useful to others, or provide functionality other
-packages in General might want to rely on, go for it! We only ask that you consider
-the following best practices.
+If your package is at a stage where it might be useful to others, or provide functionality other
+packages in General might want to rely on, go for it!
+
+We ask that you consider the following best practices.
 
 * It is easier for others to use your package if it has **documentation** that explains
 what the package is for and how to use it. This could be in the form of a README
@@ -97,16 +106,27 @@ to setup **tests** (see
 [the Pkg.jl docs](https://pkgdocs.julialang.org/v1/creating-packages/#Adding-tests-to-the-package)
 and the [Test stdlib docs](https://docs.julialang.org/en/v1/stdlib/Test/)), which
 can be automatically run by free **continuous integration** services such as GitHub Actions.
-* Also, note that the General registry is not a place for "personal packages" that consist of
+
+Packages like [PkgTemplates.jl](https://github.com/invenia/PkgTemplates.jl) or
+[PkgSkeleton.jl](https://github.com/tpapp/PkgSkeleton.jl) provide easy ways to setup
+documentation, tests, and continuous integration.
+
+Some types of packages should not be registered, or are not yet ready for registration:
+
+* The General registry is not a place for "personal packages" that consist of
 collections of "utility functions" nor for packages that are only useful for a closed group
 (like a research group or a company). For that, it is easy to set up your own registry using
 for example [LocalRegistry.jl](https://github.com/GunnarFarneback/LocalRegistry.jl). The
 [Pkg documentation about registries](https://pkgdocs.julialang.org/v1/registries/) might be useful
 if you decide to go this route.
+* "Empty" packages that do not yet have functionality are not ready to be registered.
 
-Packages like [PkgTemplates.jl](https://github.com/invenia/PkgTemplates.jl) or
-[PkgSkeleton.jl](https://github.com/tpapp/PkgSkeleton.jl) provide easy ways to setup
-documentation, tests, and continuous integration.
+#### Can my package in this registry depend on unregistered packages?
+
+No. In this registry, your package cannot depend on other packages that are
+unregistered. In addition, your package cannot depend on an unregistered
+version of an otherwise registered package. Both of these scenarios would cause
+this registry to be unreproducible.
 
 #### My pull request was not approved for automatic merging, what do I do?
 
@@ -141,6 +161,16 @@ Retrigger Registrator.
 
 Do what you did when you triggered Registrator the first time.
 
+For more details, please see the [Registrator.jl README](https://github.com/JuliaRegistries/Registrator.jl/blob/master/README.md).
+
+#### I commented `@JuliaRegistrator register` on a pull request in the General registry, but nothing happened.
+
+If you want to retrigger Registrator by using the Registrator comment-bot,
+you need to post the `@JuliaRegistrator register` comment on a commit in
+**your repository** (the repository that contains your package). Do not post
+any comments of the form `@JuliaRegistrator ...` in the `JuliaRegistries/General`
+repository.
+
 #### AutoMerge is blocked by one of my comments, how do I unblock it?
 
 Simply edit `[noblock]` into all your comments. AutoMerge periodically
@@ -168,6 +198,7 @@ As long as the package is not yet registered, renaming the package from
 * [Rename the GitHub repository][github-rename] to `NewName.jl`
 * Rename the file `src/OldName.jl` to `src/NewName.jl`
 * Rename the top-level module to `NewName`
+* Rename the package name in `Project.toml` from `OldName` to `NewName`
 * Update tests, documentation, etc, to reference the new name
 * Once you are done renaming the package, retrigger registration.
   This will make a new pull request to General. It is helpful to comment
@@ -211,6 +242,17 @@ Report it to the package repository.
 
 You can't. Package registrations are **permanent**. A version can not be overwritten in the
 registry, and code cannot be deleted.
+
+#### Can my package be registered without an [OSI approved license](https://opensource.org/licenses)?
+
+
+No, sorry. The registry is maintained by volunteers, and we don't have a legal team who can thoroughly review licenses.
+It is very easy to accidentally wander into legally murky territory when combining common OSI licenses[^1] like GPL
+with non-OSI licenses and we don't want to subject Julia users to that risk when installing packages registered in General.
+See [these](https://github.com/JuliaRegistries/General/pull/31549#issuecomment-796671872) [comments](https://github.com/JuliaRegistries/General/pull/31549#issuecomment-804196208) for more discussion. We are not lawyers and this is not legal advice.
+
+[^1]: Note that even within the world of OSI licenses, there are combinations of OSI licenses which are not
+legal to use together, such as GPL2 with Apache2.
 
 ## Registry maintenance
 
